@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "description": "4cash — a demo casino built on microservices: bets flow through Kafka, payouts and notifications through RabbitMQ, and the UI updates live over SSE."
+  },
+  "nav": {
+    "lobby": "Lobby",
+    "roulette": "Roulette",
+    "crash": "Crash",
+    "wallet": "Wallet",
+    "leaderboard": "Leaders",
+    "about": "About"
+  },
+  "header": {
+    "language": "Language",
+    "theme": {
+      "label": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "stream": {
+      "connecting": "Connecting to the event stream…",
+      "reconnecting": "Connection lost, reconnecting…",
+      "live": "Live",
+      "short": "Linking…"
+    }
+  },
+  "footer": {
+    "about": "A demo project: NestJS microservices with Kafka, RabbitMQ and PostgreSQL, UI on Next.js. Play chips only, no real money.",
+    "openToWork": "Open to work",
+    "disclaimer": "Not gambling: chips are never bought or cashed out for real."
+  },
+  "author": {
+    "write": "Message",
+    "copy": "Copy",
+    "copied": "Copied",
+    "badge": "Open to work",
+    "title": "Looking for a team that needs good engineers"
+  },
+  "player": {
+    "choose": "Pick a player",
+    "demoPlayers": "Demo players",
+    "allPlayers": "All players",
+    "leave": "Sign out",
+    "status": {
+      "active": "Active",
+      "blocked": "Blocked"
+    },
+    "persona": {
+      "demo": "demo",
+      "casual": "casual",
+      "regular": "regular",
+      "highroller": "high roller",
+      "martingale": "martingale",
+      "crash_lover": "crash fan",
+      "bot": "bot",
+      "bonus_abuser": "bonus hunter"
+    },
+    "pick": {
+      "selected": "Playing as {username}",
+      "apiDown": "The API is unavailable. Start the backend: docker compose up -d",
+      "demo": "Demo players",
+      "others": "Seeded players"
+    },
+    "create": {
+      "open": "New player",
+      "title": "New player",
+      "description": "The player is created in wallet-service; the starting deposit is a separate transaction.",
+      "username": "Name",
+      "usernamePlaceholder": "e.g. lucky_pussy",
+      "deposit": "Starting deposit",
+      "submit": "Create and play",
+      "success": "Player {username} created"
+    },
+    "gate": {
+      "title": "Choose who you play as",
+      "text": "There's no sign-in — it's a demo. Take a demo player or create your own."
+    },
+    "blocked": {
+      "title": "This player was blocked by anti-fraud",
+      "text": "risk-service spotted suspicious activity; wallet-service blocked the account. New bets will be rejected."
+    }
+  },
+  "lobby": {
+    "hero": {
+      "title": "A casino where every bet is <accent>+MONEY</accent>",
+      "text": "Roulette and crash. Get a taste of victory playing our games.",
+      "playCrash": "Play crash",
+      "playRoulette": "Roulette",
+      "pick": "Pick a player",
+      "how": "How it works",
+      "playingAs": "Playing as <name></name> · balance <balance></balance>"
+    },
+    "pick": {
+      "title": "Who are we playing as?",
+      "text": "Demo players were seeded for manual play: one has 10 thousand chips, another 250 thousand, the third almost nothing."
+    },
+    "games": {
+      "title": "Games",
+      "roulette": {
+        "title": "Roulette",
+        "text": "European, 37 pockets, PvE. Pick a spot, a chip amount and spin the wheel."
+      },
+      "crash": {
+        "title": "Crash",
+        "text": "One shared round: the multiplier climbs until it crashes. Cash out before it does."
+      }
+    }
+  },
+  "feed": {
+    "title": "Live bets",
+    "subtitle": "All players",
+    "empty": "Quiet so far. Place a bet or run pnpm simulate."
+  },
+  "roulette": {
+    "title": "Roulette",
+    "subtitle": "Pick a spot on the table and a chip. roulette-service picks the number; the wheel only shows the result.",
+    "history": "Recent numbers",
+    "historyEmpty": "Your numbers will appear here",
+    "waiting": "Bet is in play, waiting for the result…",
+    "spinning": "Spinning…",
+    "hint": "Place a bet to spin the wheel",
+    "won": "Won",
+    "lost": "Lost",
+    "chip": "Chip",
+    "summary": "Bet on {selection}",
+    "payout": "pays {odds}",
+    "potential": "win",
+    "selectBet": "Pick a spot on the table",
+    "notEnough": "Not enough chips",
+    "spin": "Spin",
+    "color": {
+      "red": "Red",
+      "black": "Black",
+      "green": "Zero"
+    },
+    "bet": {
+      "straight": "number {number}",
+      "dozen": "dozen {dozen}",
+      "red": "red",
+      "black": "black",
+      "even": "even",
+      "odd": "odd",
+      "low": "1–18",
+      "high": "19–36"
+    }
+  },
+  "crash": {
+    "title": "Crash",
+    "subtitle": "One round for everyone. Bet while betting is open and cash out before the chart crashes.",
+    "phase": {
+      "betting": "betting open",
+      "running": "flying",
+      "crashed": "crashed",
+      "idle": "waiting"
+    },
+    "bettingIn": "Betting open · {seconds} s",
+    "crashed": "Crashed!",
+    "idle": "Waiting for the next round",
+    "round": "Round #{id}",
+    "amount": "Bet",
+    "autoCashout": "Auto cash-out",
+    "autoHint": "The server cashes out for you at this multiplier (1.01–100)",
+    "cashout": "Cash out",
+    "inRound": "You're in — waiting for take-off",
+    "queued": "Processing your bet…",
+    "place": "Place bet",
+    "placeNext": "Bet on the next round",
+    "cashedOut": "Cashed out at {multiplier}: {payout} chips",
+    "cashedAt": "Cashed out at {multiplier}",
+    "players": "{count, plural, one {# player} other {# players}} in the round",
+    "noPlayers": "Nobody in this round yet",
+    "lost": "busted"
+  },
+  "bets": {
+    "game": {
+      "roulette": "Roulette",
+      "crash": "Crash"
+    },
+    "on": "bet: {selection}",
+    "cancelled": "round cancelled, bet refunded",
+    "rejected": "rejected: {reason}",
+    "status": {
+      "accepted": "in play",
+      "rejected": "rejected",
+      "settled": "settled",
+      "unknown": "processing"
+    }
+  },
+  "wallet": {
+    "title": "Wallet",
+    "subtitle": "The balance updates from wallet.transactions events. Withdrawals go through the payouts queue with retries, a DLQ and a refund if the provider declines.",
+    "balance": "Balance",
+    "stats": {
+      "bets": "Bets",
+      "wagered": "Wagered",
+      "paid": "Paid out",
+      "net": "Net"
+    },
+    "withdrawalStatus": {
+      "pending": "processing",
+      "completed": "paid",
+      "failed": "declined"
+    },
+    "empty": "Nothing here yet",
+    "tx": {
+      "deposit": "Deposit",
+      "bet": "Bet",
+      "win": "Win",
+      "refund": "Bet refund",
+      "withdrawal": "Withdrawal",
+      "withdrawal_refund": "Withdrawal refund"
+    },
+    "tabs": {
+      "bets": "Bets",
+      "transactions": "Transactions",
+      "withdrawals": "Withdrawals"
+    },
+    "operations": "Operations",
+    "deposit": {
+      "tab": "Deposit",
+      "label": "Deposit amount",
+      "hint": "The balance is topped up as soon as you click.",
+      "submit": "Deposit"
+    },
+    "withdraw": {
+      "tab": "Withdraw",
+      "label": "Withdrawal amount",
+      "hint": "Chips are debited right away. The payment provider sometimes fails — then retries or a refund kick in.",
+      "submit": "Withdraw"
+    },
+    "withdrawQueued": "Withdrawal queued in payouts"
+  },
+  "leaderboard": {
+    "title": "Leaders",
+    "subtitle": "leaderboard-service builds this table from Kafka events only, and it's fetched via Kafka request-reply.",
+    "bets": "{count, plural, one {# bet} other {# bets}}",
+    "wagered": "Wagered",
+    "paid": "Paid out",
+    "ggr": "House revenue",
+    "unavailable": "leaderboard-service didn't respond. It may have just started — refresh in a few seconds.",
+    "topWinners": "Top winners",
+    "topWinnersHint": "Net result: payouts minus stakes",
+    "biggestWins": "Biggest wins",
+    "crashStats": "Crash history",
+    "crashStatsHint": "Rounds: {rounds} · median {median} · instant crashes: {instant}",
+    "source": "Processed {count} bets"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "4cash is a learning playground that shows how the mini-games work. Chips have no financial backing; the project is non-commercial.",
+    "why": {
+      "kafka": {
+        "title": "Kafka — the event log",
+        "a": "Bets, their results and money movements are events read by several independent services.",
+        "b": "The message key is playerId: one player's events are processed strictly in order.",
+        "c": "The leaderboard can be rebuilt from scratch by re-reading history (replay)."
+      },
+      "rabbit": {
+        "title": "RabbitMQ — tasks and commands",
+        "a": "A payout must run on exactly one worker, with acknowledgement, retries and a dead-letter queue.",
+        "b": "Notifications are routed to channels by a topic exchange: push, email, admin.",
+        "c": "Balance lookups and crash cash-outs are synchronous RPC answered in milliseconds."
+      }
+    },
+    "architecture": {
+      "title": "Architecture",
+      "flowTitle": "The path of one bet",
+      "flowText": "The HTTP request returns immediately (202); after that the bet travels through Kafka topics. The UI learns the result over SSE.",
+      "flow": {
+        "placed": "Gateway publishes the bet",
+        "accepted": "Wallet debits chips (transaction + outbox)",
+        "played": "The game decides the result",
+        "paid": "Wallet credits the win",
+        "live": "Gateway streams the event to the browser"
+      },
+      "services": {
+        "gateway": "HTTP API, SSE stream to the browser, RPC to other services",
+        "wallet": "Balances, debits and payouts; transactional outbox",
+        "roulette": "Spins the wheel, idempotent on redelivery",
+        "crash": "Round game loop; recovers after a crash",
+        "risk": "Anti-fraud over event-time windows, blocks bots",
+        "leaderboard": "In-memory projection from events, replay",
+        "payments": "Payouts: manual ack, TTL retry, DLQ",
+        "notifications": "Push, email and alerts through a topic exchange"
+      }
+    },
+    "stack": {
+      "title": "Stack",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "infra": "Infrastructure"
+    }
+  },
+  "toasts": {
+    "rejected": "Bet rejected: {reason}",
+    "viaRabbit": "via RabbitMQ · notifications exchange",
+    "notify": {
+      "deposit_received": "{amount} chips credited. Balance: {balance}",
+      "big_win": "Big win: {payout} chips!",
+      "withdrawal_completed": "Withdrawal of {amount} chips paid out",
+      "withdrawal_failed": "Withdrawal of {amount} declined ({reason}); chips returned to your balance",
+      "account_blocked": "Account blocked by anti-fraud ({reason})"
+    }
+  },
+  "errors": {
+    "INSUFFICIENT_FUNDS": "Not enough chips",
+    "PLAYER_BLOCKED": "This player is blocked",
+    "PLAYER_NOT_FOUND": "Player not found",
+    "USERNAME_TAKEN": "That name is already taken",
+    "INVALID_AMOUNT": "Invalid amount",
+    "TOO_LATE": "Too late — the round already crashed",
+    "NO_ACTIVE_BET": "You have no bet in this round",
+    "ROUND_NOT_STARTED": "The round hasn't started yet",
+    "NO_RUNNING_ROUND": "No round is running right now",
+    "NETWORK": "The API is unreachable — is the backend running?",
+    "TIMEOUT": "The service didn't respond in time",
+    "UNKNOWN": "Something went wrong"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "Maybe it never existed — like a win on zero when you bet on red.",
+    "home": "Back to the lobby"
+  }
+}

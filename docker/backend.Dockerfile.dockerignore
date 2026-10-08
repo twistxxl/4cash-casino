@@ -1,0 +1,9 @@
+apps/web/*
+!apps/web/package.json
+docker
+infra
+*.md
+requests.http
+# последнее правило побеждает — исключения node_modules держим в конце
+**/node_modules
+**/.next

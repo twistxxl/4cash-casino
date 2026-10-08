@@ -1,0 +1,104 @@
+### Для VS Code REST Client / JetBrains HTTP Client
+### id демо-игроков фиксированные — их создаёт `pnpm seed`
+@host = http://localhost:3000
+@alice = 11111111-1111-4111-8111-111111111111
+@bob = 22222222-2222-4222-8222-222222222222
+@broke = 33333333-3333-4333-8333-333333333333
+
+############################ ИГРОКИ (RabbitMQ RPC → wallet) ############################
+
+### Профиль: баланс, статистика, последние транзакции, выводы
+GET {{host}}/players/{{alice}}
+
+### Список игроков по балансу (фильтры: persona, status)
+GET {{host}}/players?limit=10
+
+### Только заблокированные антифродом
+GET {{host}}/players?status=blocked
+
+### Боты
+GET {{host}}/players?persona=bot
+
+### Новый игрок
+POST {{host}}/players
+Content-Type: application/json
+
+{ "username": "my_player", "country": "RU", "deposit": 5000 }
+
+### Депозит (+ push-уведомление через topic exchange)
+POST {{host}}/players/{{alice}}/deposit
+Content-Type: application/json
+
+{ "amount": 1000 }
+
+### Вывод: деньги списываются сразу, выплата идёт через очередь payouts (повторы, DLQ)
+POST {{host}}/players/{{alice}}/withdraw
+Content-Type: application/json
+
+{ "amount": 100 }
+
+### Разблокировать
+POST {{host}}/players/{{alice}}/unblock
+
+############################ РУЛЕТКА (Kafka) ############################
+
+### Ставка на красное → 202 Accepted + betId. Результат — через GET /bets/:id
+POST {{host}}/bets/roulette
+Content-Type: application/json
+
+{ "playerId": "{{alice}}", "amount": 100, "selection": { "type": "red" } }
+
+### На число (35:1)
+POST {{host}}/bets/roulette
+Content-Type: application/json
+
+{ "playerId": "{{alice}}", "amount": 10, "selection": { "type": "straight", "number": 17 } }
+
+### Дюжина (2:1)
+POST {{host}}/bets/roulette
+Content-Type: application/json
+
+{ "playerId": "{{alice}}", "amount": 50, "selection": { "type": "dozen", "dozen": 2 } }
+
+### Крупная ставка → при выигрыше BIG_WIN в risk + push.big_win
+POST {{host}}/bets/roulette
+Content-Type: application/json
+
+{ "playerId": "{{bob}}", "amount": 20000, "selection": { "type": "black" } }
+
+### Не хватает денег → bets.rejected (INSUFFICIENT_FUNDS)
+POST {{host}}/bets/roulette
+Content-Type: application/json
+
+{ "playerId": "{{broke}}", "amount": 500, "selection": { "type": "red" } }
+
+### Статус ставки (подставь betId из ответа выше)
+GET {{host}}/bets/PASTE-BET-ID-HERE
+
+############################ КРАШ (Kafka + RabbitMQ RPC) ############################
+
+### Текущий раунд: фаза, множитель, ставки, история
+GET {{host}}/crash
+
+### Ставка с автокэшаутом на 2x
+POST {{host}}/bets/crash
+Content-Type: application/json
+
+{ "playerId": "{{alice}}", "amount": 200, "autoCashout": 2 }
+
+### Ставка без автокэшаута — забирать руками
+POST {{host}}/bets/crash
+Content-Type: application/json
+
+{ "playerId": "{{bob}}", "amount": 1000 }
+
+### Забрать! (только когда phase = running)
+POST {{host}}/crash/cashout
+Content-Type: application/json
+
+{ "playerId": "{{bob}}" }
+
+############################ LEADERBOARD (Kafka request-reply) ############################
+
+### Топ игроков, RTP по играм, история краша — собрано из событий Kafka
+GET {{host}}/leaderboard

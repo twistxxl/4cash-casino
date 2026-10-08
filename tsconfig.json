@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@app/common": ["./libs/common/src"]
+    }
+  },
+  "include": ["apps/**/*.ts", "libs/**/*.ts", "scripts/**/*.ts"],
+  // Фронт — отдельный workspace-пакет со своим tsconfig (apps/web/tsconfig.json)
+  "exclude": ["apps/web", "node_modules"]
+}

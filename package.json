@@ -1,0 +1,52 @@
+{
+  "name": "4cash",
+  "version": "3.0.0",
+  "private": true,
+  "description": "4cash — казино на NestJS-микросервисах: Kafka + RabbitMQ + PostgreSQL, веб-интерфейс на Next.js",
+  "packageManager": "pnpm@10.23.0",
+  "scripts": {
+    "up": "docker compose up -d --build",
+    "down": "docker compose down",
+    "infra:up": "docker compose up -d kafka kafka-ui rabbitmq postgres adminer",
+    "infra:down": "docker compose down",
+    "infra:reset": "docker compose down -v",
+    "infra:setup": "node -r ts-node/register/transpile-only -r tsconfig-paths/register scripts/setup.ts",
+    "seed": "node -r ts-node/register/transpile-only -r tsconfig-paths/register scripts/seed.ts",
+    "simulate": "node -r ts-node/register/transpile-only -r tsconfig-paths/register scripts/simulate.ts",
+    "flood": "node -r ts-node/register/transpile-only -r tsconfig-paths/register scripts/flood.ts",
+    "start:gateway": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/api-gateway/src/main.ts",
+    "start:wallet": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/wallet-service/src/main.ts",
+    "start:roulette": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/roulette-service/src/main.ts",
+    "start:crash": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/crash-service/src/main.ts",
+    "start:risk": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/risk-service/src/main.ts",
+    "start:leaderboard": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/leaderboard-service/src/main.ts",
+    "start:payments": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/payments-service/src/main.ts",
+    "start:notifications": "node --watch -r ts-node/register/transpile-only -r tsconfig-paths/register apps/notifications-service/src/main.ts",
+    "dev:web": "pnpm --filter @4cash/web dev",
+    "build:web": "pnpm --filter @4cash/web build",
+    "dev": "concurrently -k -n gateway,wallet,roulette,crash,risk,leaders,payments,notify,web -c blue,green,red,yellow,magenta,cyan,white,gray,blueBright \"pnpm:start:gateway\" \"pnpm:start:wallet\" \"pnpm:start:roulette\" \"pnpm:start:crash\" \"pnpm:start:risk\" \"pnpm:start:leaderboard\" \"pnpm:start:payments\" \"pnpm:start:notifications\" \"pnpm:dev:web\"",
+    "typecheck": "tsc --noEmit && pnpm --filter @4cash/web typecheck"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.2.7",
+    "@nestjs/core": "^11.2.7",
+    "@nestjs/microservices": "^11.2.7",
+    "@nestjs/platform-express": "^11.2.7",
+    "amqp-connection-manager": "^4.1.15",
+    "amqplib": "^0.10.9",
+    "kafkajs": "^2.2.4",
+    "pg": "^8.23.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@types/amqplib": "^0.10.8",
+    "@types/node": "^22.20.5",
+    "@types/pg": "^8.23.1",
+    "concurrently": "^9.2.5",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
+  }
+}

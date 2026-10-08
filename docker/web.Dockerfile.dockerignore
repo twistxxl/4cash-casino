@@ -1,0 +1,13 @@
+apps/*
+!apps/web
+libs
+scripts
+docker
+infra
+*.md
+requests.http
+# В .dockerignore побеждает последнее подходящее правило: эти строки должны идти ПОСЛЕ !apps/web,
+# иначе локальные node_modules (Windows-симлинки pnpm) попадут в образ и сломают сборку
+**/node_modules
+**/.next
+**/*.tsbuildinfo
